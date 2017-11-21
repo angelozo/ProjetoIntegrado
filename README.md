@@ -11,24 +11,6 @@
 4. Rode um composer install dentro da pasta no seu melhor terminal
 5. dab it
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 ### Colaboradores
 
 [angeloimg]: https://avatars1.githubusercontent.com/u/18298628?s=200 "Angelo Silva"
