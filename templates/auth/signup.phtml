@@ -1,0 +1,63 @@
+{{ include('header.phtml') }}
+
+<div class="container-fluid global-wrapper-signup">
+	<div class="row">
+		<div class="col-md-12 col-xs-12">
+			<div class="page-header">
+				<h1>Cadastre-se</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="signup-login-form">
+			<form action="{{ path_for('auth.signup.post') }}" method="POST">
+			<div class="col-md-12 col-xs-12">
+					<label for="cpf">CPF:</label>
+					<input name="cpf" class="form-control" required="true" placeholder="Ex: 99999999999">
+
+					<label for="nome">Nome completo:</label>
+					<input name="nome" class="form-control" required="true" placeholder="Fulano da Silva Santos">
+
+					<label for="email">E-mail:</label>
+					<input type="email" name="email" class="form-control" required="true" placeholder="fulano-da-silva@email.com">
+
+					<label for="telefone">Telefone:</label>
+					<input name="telefone" class="form-control" required="true" placeholder="(99) 99999-9999">
+			</div>
+
+			<div class="col-xs-6 col-sm-6">
+				<label for="cidade">Cidade:</label>
+				<input name="cidade" class="form-control" placeholder="Boituva">
+			</div>
+
+			<div class="col-xs-6 col-sm-6">
+				<label for="estado">Estado:</label>
+				<input name="estado" class="form-control" placeholder="São Paulo">
+			</div>
+
+			<div class="col-md-12 col-xs-12">
+				<label for="tipo_instituicao">Tipo da instituição:</label>
+				<select name="tipo_instituicao" class="form-control">
+					<option value="Empresa">Empresa</option>
+					<option value="Escola">Escola</option>
+					<option value="Faculdade">Faculdade</option>
+				</select>
+
+				<label for="nome_instituicao">Nome da instituição:</label>
+				<input name="nome_instituicao" class="form-control" placeholder="Instituto Federal de Educação Ciência e Tecnologia">
+
+				<label for="password">Senha:</label>
+				<input type="password" name="password" class="form-control" required="true" placeholder="Senha">
+
+				<label for="password_confirm">Confirme a senha:</label>
+				<input type="password" name="password_confirm" class="form-control" required="true" placeholder="Senha">
+
+				<input type="submit" class="btn btn-primary form-control" name="submit" value="Cadastrar">
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{{ include('footer.phtml') }}
