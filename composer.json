@@ -1,18 +1,25 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
+    "name": "Interdisciplinar",
+    "description": "Trabalho Interdisciplinar",
     "keywords": ["microframework", "rest", "router", "psr7"],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "homepage": "https://github.com/angelozo/ProjetoIntegrado",
     "license": "MIT",
     "authors": [
         {
             "name": "Angelo Silva",
-            "email": "angelorodriigo.rs@gmail.com",
-            "homepage": "http://www.joshlockhart.com/"
+            "email": "angelorodriigo.rs@gmail.com"
         },
         {
             "name": "Jaíne Santos",
             "email": "jaine.ssantos1@gmail.com"
+        },
+        {
+            "name": "Rodrigo Vincoleto",
+            "email": "rodrigovincoleto@gmail.com"
+        },
+        {
+            "name": "Rodrigo Oliveira",
+            "email": "soaresoliveirasoares@gmail.com"
         }
     ],
     "require": {
