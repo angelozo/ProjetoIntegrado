@@ -11,7 +11,21 @@
 				<ul class="list-group">
 					{% for evento in eventos %}
 						<li class="list-group-item">
-							<h2>{{ evento.name }}</h2>
+							<div>
+								<h2>{{ evento.nome }}</h2><hr>
+								<div><b>data:</b> {{ evento.data }}</div><br>
+								<div><b>horário: <b>{{ evento.horario }}</div><br>
+								<div><b>local:</b> {{ evento.local }}</div><br>
+								<div><b>disponivelParaAlunos:</b> {{ evento.disponivelParaAlunos }}</div><br>
+								<div><b>disponivelParaExterno:</b> {{ evento.disponivelParaExterno }}</div><br>
+								<div><b>palestrante:</b> {{ evento.palestrante }}</div><br>
+								<div><b>descricao:</b> {{ evento.descricao }}</div><br>
+								<div><b>limiteUsuarios:</b> {{ evento.limiteUsuarios }}</div><br><br>
+
+								<a href="{{ path_for('eventos.inscrever', {'id': evento.id}) }}">Inscrever</a>
+								<br>
+								<a>Cancelar Inscrição</a>
+							</div>
 						</li>
 					{% endfor %}
 				</ul>

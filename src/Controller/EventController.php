@@ -15,4 +15,8 @@ class EventController extends Controller {
 			'eventos' => $eventos
 		]);
 	}
+
+	public function inscrever($request, $response, $args) {
+		var_dump($request->getParams());
+	}
 }

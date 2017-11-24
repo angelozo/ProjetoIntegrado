@@ -14,12 +14,33 @@ class Orm {
 	}
 
 	public function loadAll() {
-		return $this->db->table('eventos')->get();
+		return $this->db
+			->table($this->table)
+			->get();
+	}
+
+	public function load($id) {
+		return $this->db
+			->table($this->table)
+			->where('id', '=', $id)
+			->get();
+	}
+
+	public function save() {
+		$fillableFields = $this->fillable;
+
+		foreach ($fillableFields as $field) {
+			# code...
+		}
 	}
 
 	private function instanceDatabase() {
 		$databaseFactory = new DatabaseFactory;
 
 		$this->db = $databaseFactory->newDatabase();
+	}
+
+	public function getDatabase() {
+		return $this->db;
 	}
 }
