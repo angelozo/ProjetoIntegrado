@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
-use App\Model\Evento;
+use App\Service\EventService;
 
 class EventController extends Controller {
 
 	public function index($request, $response, $args) {
-		$evento = new Evento;
+		$eventService = new EventService;
 
-		$eventos = $evento->loadAll();
+		$events = $eventService->loadAll();
 
 		$this->view->render($response, 'eventos.phtml', [
-			'eventos' => $eventos
+			'eventos' => $events
 		]);
 	}
 
 	public function inscrever($request, $response, $args) {
-		var_dump($request->getParams());
+		var_dump($args);
 	}
 }

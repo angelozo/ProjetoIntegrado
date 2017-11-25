@@ -7,7 +7,7 @@ $app->get('/', 'App\Controller\EventController:index');
 
 $app->get('/eventos', 'App\Controller\EventController:index')->setName('eventos');
 
-$app->get('/evento/{id}/inscrever', 'App\Controller\EventController:inscrever')->setName('eventos.inscrever');
+$app->get('/evento/{id}/inscrever', 'App\Controller\EventController:inscrever')->setName('eventos.inscrever')->add($auth);
 
 // Authentication Routes
 $app->get('/cadastrar', 'App\Controller\AuthController:signup')->setName('auth.signup')->add($authLogin);

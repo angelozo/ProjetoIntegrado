@@ -5,8 +5,8 @@ namespace Lib\Auth;
 class Crypt {
 	private $cost;
 
-	public function __construct($cost == 12) {
-		$this->cost = $cost;
+	public function __construct() {
+		$this->cost = 12;
 	}
 
 	public function setHash($password) {

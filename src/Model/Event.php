@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Lib\ORM\Orm;
 
-class Evento extends Orm {
+class Event {
 
 	protected $id;
 	protected $nome;
@@ -15,6 +15,4 @@ class Evento extends Orm {
 	protected $palestrante;
 	protected $descricao;
 	protected $limiteUsuarios;
-
-	protected $table = 'evento';
 }
