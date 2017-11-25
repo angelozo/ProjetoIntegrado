@@ -11,17 +11,24 @@ class AuthController extends Controller {
 	}
 
 	public function signupPost($request, $response, $args) {
-		try {
-			$params = $request->getParams();
+		$params = $request->getParams();
 
-			$service = new UserService;
-			$service->createNewUser($params);
+		if($params['action']) {
+			try {
+				$params = $request->getParams();
 
-			return $response->withRedirect('login');
-		} catch(\Exception $e) {
-			$this->view->render($response, 'auth/signup.phtml', [
-				'error' => $e->getMessage()
-			]);
+				$service = new UserService;
+				$service->createNewUser($params);
+
+				return $response->withRedirect('login');
+			} catch(\Exception $e) {
+				$this->view->render($response, 'auth/signup.phtml', [
+					'error' => $e->getMessage(),
+					'actualFields' => $params
+				]);
+			}
+		} else {
+			return $response->withRedirect('/');
 		}
 	}
 

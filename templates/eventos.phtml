@@ -1,39 +1,31 @@
 {{ include('header.phtml') }}
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="page-header">
-				<h1>Eventos</h1>
-			</div>
+<main>
+<div class="container">
+	<div class="events">
+	  <ul class="collapsible" data-collapsible="accordion">
+	  	{% for evento in eventos %}
+	    <li>
+	      <div class="collapsible-header">
+	        <h2>{{ evento.nome }}</h2>
 
-			<div class="stream-eventos">
-				<ul class="list-group">
-					{% for evento in eventos %}
-						<li class="list-group-item">
-							<div>
-								<h2>{{ evento.nome }}</h2><hr>
-								<div><b>data:</b> {{ evento.data }}</div><br>
-								<div><b>horário: <b>{{ evento.horario }}</div><br>
-								<div><b>local:</b> {{ evento.local }}</div><br>
-								<div><b>disponivelParaAlunos:</b> {{ evento.disponivelParaAlunos }}</div><br>
-								<div><b>disponivelParaExterno:</b> {{ evento.disponivelParaExterno }}</div><br>
-								<div><b>palestrante:</b> {{ evento.palestrante }}</div><br>
-								<div><b>descricao:</b> {{ evento.descricao }}</div><br>
-								<div><b>limiteUsuarios:</b> {{ evento.limiteUsuarios }}</div><br><br>
+	      </div>
+	      <div class="collapsible-body">
+	        <ul>
+	          <li>Data:	{{ evento.data }}</li>
+	          <li>Horário:	{{ evento.data }}</li>
+	          <li>Local:	{{ evento.local }}</li>
+	          <li>Descrição detalhada do evento: {{ evento.descricao }} </li>
+	          <li>Palestrante: {{ evento.palestrante }}</li>
+	        </ul>
+	      </div>
 
-								<a href="{{ path_for('eventos.inscrever', {'id': evento.id}) }}">Inscrever</a>
-								<br>
-								<a>Cancelar Inscrição</a>
-							</div>
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
+	      <a href="{{ path_for('eventos.inscrever', {'id': evento.id}) }}" class="waves-effect waves-light btn-large red">Realizar Inscrição</a>
+	    </li>
+	    {% endfor %}
+	  </ul>
 	</div>
 </div>
-
-
+{{ include('menu.phtml') }}
 
 {{ include('footer.phtml') }}

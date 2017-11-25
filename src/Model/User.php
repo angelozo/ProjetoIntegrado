@@ -54,7 +54,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("O nome não pode ser vazio");
+			throw new \Exception("O nome não pode ser vazio");
 		}
 	}
 
@@ -64,7 +64,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("E-mail vazio ou inválido");
+			throw new \Exception("E-mail vazio ou inválido");
 		}
 	}
 
@@ -74,7 +74,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("Telefone não pode estar vazio");
+			throw new \Exception("Telefone não pode estar vazio");
 		}
 	}
 
@@ -86,7 +86,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("Senha não pode estar vazia");
+			throw new \Exception("Senha não pode estar vazia");
 		}
 	}
 
@@ -96,7 +96,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("Cidade não pode ser vazia");
+			throw new \Exception("Cidade não pode ser vazia");
 		}
 	}
 
@@ -106,7 +106,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("Estado não pode ser vazio");
+			throw new \Exception("Estado não pode ser vazio");
 		}
 	}
 
@@ -117,7 +117,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("Tipo da instituição não pode ser vazio");
+			throw new \Exception("Tipo da instituição não pode ser vazio");
 		}
 	}
 
@@ -127,7 +127,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("Nome da instituição não pode ser vazio");
+			throw new \Exception("Nome da instituição não pode ser vazio");
 		}
 	}
 
@@ -137,7 +137,7 @@ class User {
 
 			return $this;
 		} else {
-			throw new Exception("Cpf não pode ser vazio");
+			throw new \Exception("Cpf não pode ser vazio");
 		}
 	}
 }

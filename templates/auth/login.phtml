@@ -1,29 +1,43 @@
-{{ include('header.phtml') }}
+{{ include('header-login.phtml') }}
 
-<div class="container-fluid global-wrapper-login">
-	<div class="row">
-		<div class="col-md-12 col-xs-12">
-			<div class="page-header">
-				<h1>Faça login</h1>
-			</div>
-		</div>
-	</div>
+<main>
+  <div class="container login">
+    <div class="row">
+      <h1>Faça login</h1>
+    </div>
+    {% if error != '' %}
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card red darken-1">
+            <div class="card-content white-text">
+              <p>{{ error }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
 
-	<div class="row">
-		<div class="signup-login-form">
-			<form action="{{ path_for('auth.login.post') }}" method="POST">
-			<div class="col-md-12 col-xs-12">
-				<label for="login">CPF:</label>
-				<input name="login" class="form-control" required="true" placeholder="">
+    <div class="row">
+      <form action="{{ path_for('auth.login.post') }}" method="POST" class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="cpf" type="text" required="true" name="cpf" class="validate cpf" value="{{ actualFields.cpf }}">
+            <label for="cpf">CPF</label>
+          </div>
+        </div>
 
-				<label for="password">Senha:</label>
-				<input type="password" name="password" class="form-control" required="true" placeholder="">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" name="password" required="true" class="validate" value="">
+            <label for="password">Senha</label>
+          </div>
+        </div>
+    </div>
 
-				<input type="submit" class="btn btn-primary form-control" name="submit" value="Entrar">
-			</div>
-			</form>
-		</div>
-	</div>
-</div>
+        <button class="waves-effect waves-light btn-large green darken-1" type="submit" name="action" value="entrar">Entrar</button>
+    </div>
+  </div>
+
+{{ include('menu.phtml') }}
 
 {{ include('footer.phtml') }}

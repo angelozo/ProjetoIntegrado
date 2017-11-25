@@ -1,16 +1,17 @@
-<div class="collapse navbar-collapse" id="menu">
-	<ul class="nav navbar-nav">
-		<li class="active"><a href="{{ path_for('eventos') }}"> <i class="glyphicon glyphicon-calendar"></i> Eventos <span class="sr-only">(current)</span></a></li>
-
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> Minha conta <span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="#"> Meus dados</a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="#">Comprovante</a></li>
-				<li><a href="#">Presenças</a></li>
-				<li><a href="#">Certificados</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+	<div class="container login">
+		<ul id="slide-out" class="side-nav">
+			<li><a href="{{ path_for('eventos') }}">Eventos</a></li>
+			<li><div class="divider"></div></li>
+			<li><a href="#!">Atualizar Dados Pessoais</a></li>
+			<li><div class="divider"></div></li>
+			<li><a href="#!">Gerar Comprovante de Inscrição</a></li>
+			<li><div class="divider"></div></li>
+			<li><a href="#!">Gerar Lista de Presença</a></li>
+			<li><div class="divider"></div></li>
+			<li><a href="#!">Gerar Certificados</a></li>
+			<li><div class="divider"></div></li>
+			<li><a href="#!">Sair</a></li>
+			<li><div class="divider"></div></li>
+		</ul>
+	</div>
+</main>

@@ -1,63 +1,96 @@
-{{ include('header.phtml') }}
+{{ include('header-login.phtml') }}
 
-<div class="container-fluid global-wrapper-signup">
-	<div class="row">
-		<div class="col-md-12 col-xs-12">
-			<div class="page-header">
-				<h1>Cadastre-se</h1>
-			</div>
-		</div>
-	</div>
+<main>
+  <div class="container login">
+    <div class="row">
+      <h1>Cadastre-se</h1>
+    </div>
+    {% if error != '' %}
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card red darken-1">
+            <div class="card-content white-text">
+              <p>{{ error }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
 
-	<div class="row">
-		<div class="signup-login-form">
-			<form action="{{ path_for('auth.signup.post') }}" method="POST">
-			<div class="col-md-12 col-xs-12">
-					<label for="cpf">CPF:</label>
-					<input name="cpf" class="form-control" required="true" placeholder="Ex: 99999999999">
+    <div class="row">
+      <form action="{{ path_for('auth.signup.post') }}" method="POST" class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="cpf" type="text" required="true" name="cpf" class="validate cpf" value="{{ actualFields.cpf }}">
+            <label for="cpf">CPF</label>
+          </div>
+        </div>
 
-					<label for="nome">Nome completo:</label>
-					<input name="nome" class="form-control" required="true" placeholder="Fulano da Silva Santos">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" name="password" required="true" class="validate" value="">
+            <label for="password">Senha</label>
+          </div>
+        </div>
 
-					<label for="email">E-mail:</label>
-					<input type="email" name="email" class="form-control" required="true" placeholder="fulano-da-silva@email.com">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="nome" type="text" name="nome" required="true" class="validate" value="{{ actualFields.nome }}">
+            <label for="nome">Nome completo</label>
+          </div>
+        </div>
 
-					<label for="telefone">Telefone:</label>
-					<input name="telefone" class="form-control" required="true" placeholder="(99) 99999-9999">
-			</div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" name="email" required="true" class="validate" value="{{ actualFields.email }}">
+            <label for="email">E-mail</label>
+          </div>
+        </div>
 
-			<div class="col-xs-6 col-sm-6">
-				<label for="cidade">Cidade:</label>
-				<input name="cidade" class="form-control" placeholder="Boituva">
-			</div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="telefone" name="telefone" type="text" name="telefone" class="validate phone_with_ddd" value="{{ actualFields.telefone }}">
+            <label for="telefone">Telefone</label>
+          </div>
+        </div>
 
-			<div class="col-xs-6 col-sm-6">
-				<label for="estado">Estado:</label>
-				<input name="estado" class="form-control" placeholder="São Paulo">
-			</div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="cidade" name="cidade" type="text" class="validate" value="{{ actualFields.cidade }}">
+            <label for="cidade">Cidade</label>
+          </div>
 
-			<div class="col-md-12 col-xs-12">
-				<label for="tipo_instituicao">Tipo da instituição:</label>
-				<select name="tipo_instituicao" class="form-control">
-					<option value="Empresa">Empresa</option>
-					<option value="Escola">Escola</option>
-					<option value="Faculdade">Faculdade</option>
-				</select>
+          <div class="input-field col s6">
+            <input id="estado" name="estado" type="text" class="validate" value="{{ actualFields.estado }}">
+            <label for="estado">Estado</label>
+          </div>
+        </div>
 
-				<label for="nome_instituicao">Nome da instituição:</label>
-				<input name="nome_instituicao" class="form-control" placeholder="Instituto Federal de Educação Ciência e Tecnologia">
+        <div class="row">
+          <div class="input-field col s6">
+            <select name="tipo_instituicao" name="tipo_instituicao" id="tipo_instituicao" type="text" class="validate">
+            	<option value="faculdade" {% if actualFields.tipo_instituicao == 'faculdade' %} selected="true" {% endif %}>Faculdade</option>
+            	<option value="empresa" {% if actualFields.tipo_instituicao == 'empresa' %} selected="true" {% endif %}>Empresa</option>
+            	<option value="escola" {% if actualFields.tipo_instituicao == 'escola' %} selected="true" {% endif %}>Escola</option>
+            </select>
+            <label for="tipo_instituicao">Tipo da instituição</label>
+          </div>
 
-				<label for="password">Senha:</label>
-				<input type="password" name="password" class="form-control" required="true" placeholder="Senha">
+          <div class="input-field col s6">
+            <input id="nome_instituicao" name="nome_instituicao" type="text" class="validate" value="{{ actualFields.nome_instituicao }}">
+            <label for="nome_instituicao">Nome da instituição</label>
+          </div>
+        </div>
 
-				<label for="password_confirm">Confirme a senha:</label>
-				<input type="password" name="password_confirm" class="form-control" required="true" placeholder="Senha">
+        <button class="waves-effect waves-light btn-large green darken-1" type="submit" name="action" value="cadastrar">Cadastrar</button>
+        <br>
+        <a class="waves-effect waves-light btn-large blue darken-1">Recuperar Senha</a>
+        <hr>
+        <a class="waves-effect waves-light btn-large blue darken-1">Primeiro Acesso</a>
+      </form>
+    </div>
+  </div>
 
-				<input type="submit" class="btn btn-primary form-control" name="submit" value="Cadastrar">
-			</div>
-			</form>
-		</div>
-	</div>
-</div>
+{{ include('menu.phtml') }}
 
 {{ include('footer.phtml') }}
