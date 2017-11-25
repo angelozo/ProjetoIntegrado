@@ -1,0 +1,34 @@
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main{
+    flex: 1 0 auto;
+}
+.login{
+    h1{
+        font-size: 1.8em;
+        text-align: center;
+    }
+    a, button{
+        width: 100%;
+    }
+    a{
+        margin: 10px 0px;
+    }
+    hr{
+        border: 0.5px solid #d3d3d3;
+    }
+}
+.collapsible{
+    h2{
+        font-size: 16px;
+    }
+}
+.events{
+    a{
+        width: 100%;
+
+    }
+}
