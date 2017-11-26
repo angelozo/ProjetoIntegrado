@@ -4,29 +4,30 @@ namespace Lib\Auth;
 
 class Authentication {
 
-	private $user;
+	public static function isLogged() {
+		$session = new Session();
 
-	public function __construct() {
-		$this->session = new Session;
+		return ($session->compareField('status', 'logged'));
 	}
 
-	public function isLogged() {
-		return ($this->session->compareField('status', 'logged'));
-	}
-
-	public function authenticateUser($user, $password) {
+	public static function authenticateUser($user, $password) {
 		$crypt = new Crypt();
 		$session = new Session();
 
-		var_dump($user);
-
-		if($crypt->compareHash($password, $user->getPassword())) {
+		if($crypt->compareHash($password, $user->password)) {
 			$session->setSession('status', 'logged');
-			$session->setSession('username', $user->getName());
+			$session->setSession('username', $user->name);
+			$session->setSession('id', $user->id);
 
 			return true;
 		}
 
-		throw new \Exception("Senha incorreta", -1);
+		return false;
+	}
+
+	public static function getUserId() {
+		$session = new Session();
+
+		return $session->getField('id');
 	}
 }

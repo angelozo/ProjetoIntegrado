@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Service\UserService;
+use App\Model\User;
+use Lib\Auth\Authentication;
 
 class AuthController extends Controller {
 
@@ -11,24 +12,39 @@ class AuthController extends Controller {
 	}
 
 	public function signupPost($request, $response, $args) {
-		$params = $request->getParams();
+		try {
+			$params = $request->getParams();
 
-		if($params['action']) {
-			try {
-				$params = $request->getParams();
-
-				$service = new UserService;
-				$service->createNewUser($params);
-
-				return $response->withRedirect('login');
-			} catch(\Exception $e) {
-				$this->view->render($response, 'auth/signup.phtml', [
-					'error' => $e->getMessage(),
-					'actualFields' => $params
-				]);
+			if(!$params['action']) {
+				return $response->withRedirect('/');
 			}
-		} else {
-			return $response->withRedirect('/');
+
+			$data = [
+				'name' => $params['nome'],
+				'email' => $params['email'],
+				'telefone' => $params['telefone'],
+				'password' => $params['password'],
+				'cidade' => $params['cidade'],
+				'estado' => $params['estado'],
+				'tipoInstituicao' => $params['tipo_instituicao'],
+				'nomeInstituicao' => $params['nome_instituicao'],
+				'cpf' => $params['cpf']
+			];
+
+			$user = User::create($data);
+
+			return $response->withRedirect('/login');
+		} catch(\Exception $e) {
+			$errorMessage = 'Erro ao cadastrar usuário.';
+
+			if($e->getCode() == 23000) {
+				$errorMessage = 'Usuário já cadastrado.';
+			}
+
+			$this->view->render($response, 'auth/signup.phtml', [
+				'error' => $errorMessage,
+				'actualFields' => $params
+			]);
 		}
 	}
 
@@ -39,21 +55,26 @@ class AuthController extends Controller {
 	public function loginPost($request, $response, $args) {
 		$params = $request->getParams();
 
-		if($params['action']) {
-			try {
-				$userService = new UserService();
-
-				$userService->loginUser($params);
-
-				return $response->withRedirect('eventos');
-			} catch(\Exception $e) {
-				$this->view->render($response, 'auth/login.phtml', [
-					'error' => $e->getMessage(),
-					'actualFields' => $params
-				]);
-			}
-		} else {
+		if(!$params['action']) {
 			return $response->withRedirect('/');
 		}
+
+		$user = User::where('cpf', $params['cpf'])->first();
+
+		if(!$user->id) {
+			return $this->view->render($response, 'auth/login.phtml', [
+				'error' => 'Usuário não encontrado.',
+				'actualFields' => $params
+			]);
+		}
+
+		if(!Authentication::authenticateUser($user, $params['password'])) {
+			return $this->view->render($response, 'auth/login.phtml', [
+				'error' => 'Senha incorreta.',
+				'actualFields' => $params
+			]);
+		}
+
+		return $response->withRedirect('/eventos');
 	}
 }

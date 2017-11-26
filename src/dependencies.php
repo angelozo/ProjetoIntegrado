@@ -3,6 +3,14 @@
 
 $container = $app->getContainer();
 
+$capsule = new \Illuminate\Database\Capsule\Manager;
+
+$capsule->addConnection($container['settings']['db']);
+
+$capsule->setAsGlobal();
+
+$capsule->bootEloquent();
+
 // monolog
 $container['logger'] = function ($container) {
     $settings = $container->get('settings')['logger'];
@@ -26,6 +34,15 @@ $container['view'] = function ($container) {
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 
     return $view;
+};
+
+$container['db'] = function ($container) use ($capsule){
+   return $capsule;
+};
+
+$container['flash'] = function($container) {
+    session_start();
+    return new \Slim\Flash\Messages();
 };
 
 // create app instance

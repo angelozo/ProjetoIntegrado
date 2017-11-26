@@ -2,159 +2,47 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model;
 use Lib\Auth\Crypt;
 
-class User {
+class User extends Model {
 
-	protected $id;
-	protected $name;
-	protected $email;
-	protected $telefone;
-	protected $password;
-	protected $cidade;
-	protected $estado;
-	protected $tipoInstituicao;
-	protected $nomeInstituicao;
-	protected $cpf;
+	protected $table = 'usuario';
+	protected $fillable = ['name','email','telefone', 'password', 'cidade', 'estado', 'tipoInstituicao', 'nomeInstituicao', 'cpf'];
 
-	public function getId() {
-		return $this->id;
+	public function setPasswordAttribute($value) {
+		$this->attributes['password'] = Crypt::setHash($value);
 	}
 
-	public function getName() {
-		return $this->name;
-	}
+	public function events() {
+        return $this->belongsToMany('App\Model\Event', 'evento_usuario', 'usuario', 'evento');
+    }
 
-	public function getEmail() {
-		return $this->email;
-	}
+    public function isEnrolledTo($event) {
+    	return (count($this->events) >= 1);
+    }
 
-	public function getTelefone() {
-		return $this->telefone;
-	}
+    public function isBusyAtTimeOfEvent($eventToEnroll) {
+    	$eventToEnrollStartDate = new \DateTime($eventToEnroll->startDate);
+    	$eventToEnrollEndDate = new \DateTime($eventToEnroll->endDate);
 
-	public function getPassword() {
-		return $this->password;
-	}
+    	if(!$this->isEnrolledToAnyEvent()) {
+    		return false;
+    	}
 
-	public function getIdade() {
-		return $this->cidade;
-	}
+    	foreach ($this->events as $event) {
+    		$eventStartDate = new \DateTime($event->startDate);
+    		$eventEndDate = new \DateTime($event->endDate);
 
-	public function getEstado() {
-		return $this->estado;
-	}
+    		if($eventEndDate > $eventToEnrollStartDate && $eventStartDate < $eventToEnrollEndDate) {
+    			return true;
+    		}
+    	}
 
-	public function getTipoInstituicao() {
-		return $this->tipoInstituicao;
-	}
+    	return false;
+    }
 
-	public function getNomeInstituicao() {
-		return $this->nomeInstituicao;
-	}
-
-	public function getCpf() {
-		return $this->cpf;
-	}
-
-	public function setId($id) {
-		if(!empty($id)) {
-			$this->id = $id;
-
-			return $this;
-		} else {
-			throw new \Exception("O id não pode ser vazio", -2);
-		}
-	}
-
-	public function setName($name) {
-		if(!empty($name)) {
-			$this->name = $name;
-
-			return $this;
-		} else {
-			throw new \Exception("O nome não pode ser vazio");
-		}
-	}
-
-	public function setEmail($email) {
-		if(!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$this->email = $email;
-
-			return $this;
-		} else {
-			throw new \Exception("E-mail vazio ou inválido");
-		}
-	}
-
-	public function setTelefone($telefone) {
-		if(!empty($telefone)) {
-			$this->telefone = $telefone;
-
-			return $this;
-		} else {
-			throw new \Exception("Telefone não pode estar vazio");
-		}
-	}
-
-	public function setPassword($password) {
-		if(!empty($password)) {
-			$this->password = $password;
-
-			return $this;
-		} else {
-			throw new \Exception("Senha não pode estar vazia");
-		}
-	}
-
-	public function setCidade($cidade) {
-		if(!empty($cidade)) {
-			$this->cidade = $cidade;
-
-			return $this;
-		} else {
-			throw new \Exception("Cidade não pode ser vazia");
-		}
-	}
-
-	public function setEstado($estado) {
-		if(!empty($estado)) {
-			$this->estado = $estado;
-
-			return $this;
-		} else {
-			throw new \Exception("Estado não pode ser vazio");
-		}
-	}
-
-	public function setTipoInstituicao($tipoInstituicao) {
-		if(!empty($tipoInstituicao)) {
-
-			$this->tipoInstituicao = $tipoInstituicao;
-
-			return $this;
-		} else {
-			throw new \Exception("Tipo da instituição não pode ser vazio");
-		}
-	}
-
-	public function setNomeInstituicao($nomeInstituicao) {
-		if(!empty($nomeInstituicao)) {
-			$this->nomeInstituicao = $nomeInstituicao;
-
-			return $this;
-		} else {
-			throw new \Exception("Nome da instituição não pode ser vazio");
-		}
-	}
-
-	public function setCpf($cpf) {
-		if(!empty($cpf)) {
-			$this->cpf = $cpf;
-
-			return $this;
-		} else {
-			throw new \Exception("Cpf não pode ser vazio");
-		}
-	}
+    public function isEnrolledToAnyEvent() {
+    	return (count($this->events) > 0);
+    }
 }

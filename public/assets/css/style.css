@@ -25,5 +25,8 @@ main {
 .collapsible h2 {
   font-size: 16px; }
 
+.events error.red, .events error.collapsible-header {
+  color: #FFFFFF; }
+
 .events a {
   width: 100%; }

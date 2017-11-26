@@ -28,4 +28,8 @@ class Session {
 	public function compareField($field, $value) {
 		return ($_SESSION[$field] == $value);
 	}
+
+	public function getField($field) {
+		return $_SESSION[$field];
+	}
 }
