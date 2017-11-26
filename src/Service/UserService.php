@@ -4,9 +4,10 @@ namespace App\Service;
 
 use App\Model\User;
 use Lib\Database\DatabaseFactory;
+use Lib\Auth\Authentication;
+use Lib\Auth\Crypt;
 
 class UserService {
-
 	private $db;
 
 	public function __construct() {
@@ -20,7 +21,7 @@ class UserService {
 		$user->setName($data['nome'])
 			->setEmail($data['email'])
 			->setTelefone($data['telefone'])
-			->setPassword($data['password'])
+			->setPassword($crypt->setHash($data['password']))
 			->setCidade($data['cidade'])
 			->setEstado($data['estado'])
 			->setTipoInstituicao($data['tipo_instituicao'])
@@ -54,6 +55,44 @@ class UserService {
 			}
 
 			throw new \Exception($error, -1);
+		}
+	}
+
+	public function loginUser($data) {
+		try {
+			$user = $this->findUserByCpf($data['cpf']);
+
+			$authentication = new Authentication;
+
+			return $authentication->authenticateUser($user, $data['password']);
+		} catch(\Exception $e) {
+			throw new \Exception($e->getMessage(), -1);
+		}
+	}
+
+	private function findUserByCpf($cpf) {
+		try {
+			$userData = $this->db
+			->table('usuario')
+			->where('cpf', '=', $cpf)
+			->first();
+
+			$user = new User;
+
+			$user->setId($userData->id)
+			->setName($userData->name)
+			->setEmail($userData->email)
+			->setTelefone($userData->telefone)
+			->setPassword($userData->password)
+			->setCidade($userData->cidade)
+			->setEstado($userData->estado)
+			->setTipoInstituicao($userData->tipoInstituicao)
+			->setNomeInstituicao($userData->nomeInstituicao)
+			->setCpf($userData->cpf);
+
+			return $user;
+		} catch(\Exception $e) {
+			throw new \Exception("Usuario não encontrado", -1);
 		}
 	}
 }

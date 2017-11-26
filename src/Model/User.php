@@ -20,32 +20,51 @@ class User {
 	public function getId() {
 		return $this->id;
 	}
+
 	public function getName() {
 		return $this->name;
 	}
+
 	public function getEmail() {
 		return $this->email;
 	}
+
 	public function getTelefone() {
 		return $this->telefone;
 	}
+
 	public function getPassword() {
 		return $this->password;
 	}
+
 	public function getIdade() {
 		return $this->cidade;
 	}
+
 	public function getEstado() {
 		return $this->estado;
 	}
+
 	public function getTipoInstituicao() {
 		return $this->tipoInstituicao;
 	}
+
 	public function getNomeInstituicao() {
 		return $this->nomeInstituicao;
 	}
+
 	public function getCpf() {
 		return $this->cpf;
+	}
+
+	public function setId($id) {
+		if(!empty($id)) {
+			$this->id = $id;
+
+			return $this;
+		} else {
+			throw new \Exception("O id não pode ser vazio", -2);
+		}
 	}
 
 	public function setName($name) {
@@ -80,9 +99,7 @@ class User {
 
 	public function setPassword($password) {
 		if(!empty($password)) {
-			$crypt = new Crypt;
-
-			$this->password = $crypt->setHash($password);
+			$this->password = $password;
 
 			return $this;
 		} else {

@@ -37,8 +37,23 @@ class AuthController extends Controller {
 	}
 
 	public function loginPost($request, $response, $args) {
-		var_dump($request->getParams());
+		$params = $request->getParams();
 
+		if($params['action']) {
+			try {
+				$userService = new UserService();
 
+				$userService->loginUser($params);
+
+				return $response->withRedirect('eventos');
+			} catch(\Exception $e) {
+				$this->view->render($response, 'auth/login.phtml', [
+					'error' => $e->getMessage(),
+					'actualFields' => $params
+				]);
+			}
+		} else {
+			return $response->withRedirect('/');
+		}
 	}
 }
