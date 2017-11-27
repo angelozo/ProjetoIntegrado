@@ -11,6 +11,8 @@ $app->get('/evento/{id}/cancelar', 'App\Controller\EventController:cancelar')->s
 
 $app->get('/account', 'App\Controller\AccountController:update')->setName('account.update')->add($auth);
 
+$app->post('/account', 'App\Controller\AccountController:updatePost')->setName('account.update.post')->add($auth);
+
 // Authentication Routes
 $app->get('/cadastrar', 'App\Controller\AuthController:signup')->setName('auth.signup')->add($authLogin);
 

@@ -18,26 +18,30 @@
 			        <ul>
 			          <li>Data:	{{ evento.getFormattedDate() }}</li>
 			          <li>Horário: De {{ evento.getStartHour() }} Até {{ evento.getEndHour() }}</li>
-			          <li>Local:	{{ evento.local }}</li>
+			          <li>Local: {{ evento.local }}</li>
 			          <li>Descrição detalhada do evento: {{ evento.descricao }} </li>
 			          <li>Palestrante: {{ evento.palestrante }}</li>
 			          <li>Vagas restantes: {{ evento.getRemainingSlots() }}</li>
 			        </ul>
 			      </div>
 
-			      {% if evento.isInscribable() %}
-			    	{% if evento.areYouEnrolledWithThisEvent() %}
-			    		<a href="{{ path_for('eventos.cancelar', {'id': evento.id}) }}" class="waves-effect waves-light btn-large red">Cancelar Inscrição</a>
-			    	{% else %}
-			    		{% if evento.areYouBusyAtTimeOfThisEvent() %}
-			    			<a href="#" class="btn-large grey">Você já está inscrito em outro evento neste horário!</a>
-			    		{% else %}
-			    			<a href="{{ path_for('eventos.inscrever', {'id': evento.id}) }}" class="waves-effect waves-light btn-large red">Realizar Inscrição</a>
-			    		{% endif %}
-			    	{% endif %}
-			      {% else %}
-			      	<a href="#" class="waves-effect waves-light btn-large red">Este evento não necessita de inscrição</a>
-			      {% endif %}
+			      {% if isLogged %}
+				      {% if evento.isInscribable() %}
+				    	{% if evento.areYouEnrolledWithThisEvent() %}
+				    		<a href="{{ path_for('eventos.cancelar', {'id': evento.id}) }}" class="waves-effect waves-light btn-large red">Cancelar Inscrição</a>
+				    	{% else %}
+				    		{% if evento.areYouBusyAtTimeOfThisEvent() %}
+				    			<a href="#" class="btn-large grey">Você já está inscrito em outro evento neste horário!</a>
+				    		{% else %}
+				    			<a href="{{ path_for('eventos.inscrever', {'id': evento.id}) }}" class="waves-effect waves-light btn-large red">Realizar Inscrição</a>
+				    		{% endif %}
+				    	{% endif %}
+				      {% else %}
+				      	<a href="#" class="waves-effect waves-light btn-large red">Este evento não necessita de inscrição</a>
+				      {% endif %}
+				      {% else %}
+				      <a href="{{ path_for('auth.login') }}" class="waves-effect waves-light btn-large red">Faça login para se inscrever</a>
+				      {% endif %}
 			    </li>
 			    </ul>
 		    {% endfor %}

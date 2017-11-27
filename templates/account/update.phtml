@@ -1,0 +1,92 @@
+{{ include('header-login.phtml') }}
+
+<main>
+  <div class="container login">
+    <div class="row">
+      <h1>Atualize seus dados</h1>
+    </div>
+    {% if error != '' %}
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card red darken-1">
+            <div class="card-content white-text">
+              <p>{{ error }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="row">
+      <form action="{{ path_for('account.update.post') }}" method="POST" class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="cpf" type="text" required="true" name="cpf" class="validate cpf" value="{{ data.cpf }}">
+            <label for="cpf">CPF</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" name="password" required="true" class="validate" value="">
+            <label for="password">Senha</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="nome" type="text" name="nome" required="true" class="validate" value="{{ data.name }}">
+            <label for="nome">Nome completo</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" name="email" required="true" class="validate" value="{{ data.email }}">
+            <label for="email">E-mail</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="telefone" name="telefone" type="text" name="telefone" class="validate phone_with_ddd" value="{{ data.telefone }}">
+            <label for="telefone">Telefone</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="cidade" name="cidade" type="text" class="validate" value="{{ data.cidade }}">
+            <label for="cidade">Cidade</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="estado" name="estado" type="text" class="validate" value="{{ data.estado }}">
+            <label for="estado">Estado</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6">
+            <select name="tipo_instituicao" name="tipo_instituicao" id="tipo_instituicao" type="text" class="validate">
+            	<option value="faculdade" {% if data.tipo_instituicao == 'faculdade' %} selected="true" {% endif %}>Faculdade</option>
+            	<option value="empresa" {% if data.tipo_instituicao == 'empresa' %} selected="true" {% endif %}>Empresa</option>
+            	<option value="escola" {% if data.tipo_instituicao == 'escola' %} selected="true" {% endif %}>Escola</option>
+            </select>
+            <label for="tipo_instituicao">Tipo da instituição</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="nome_instituicao" name="nome_instituicao" type="text" class="validate" value="{{ data.nome_instituicao }}">
+            <label for="nome_instituicao">Nome da instituição</label>
+          </div>
+        </div>
+
+        <button class="waves-effect waves-light btn-large green darken-1" type="submit" name="action" value="cadastrar">Atualizar</button>
+      </form>
+    </div>
+  </div>
+
+{{ include('menu.phtml') }}
+
+{{ include('footer.phtml') }}

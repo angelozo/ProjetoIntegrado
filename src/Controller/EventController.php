@@ -14,7 +14,8 @@ class EventController extends Controller {
 
 		$this->view->render($response, 'eventos.phtml', [
 			'eventos' => $events,
-			'messages' => $messages
+			'messages' => $messages,
+			'isLogged' => Authentication::isLogged()
 		]);
 	}
 
