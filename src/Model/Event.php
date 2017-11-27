@@ -39,4 +39,22 @@ class Event extends Model {
 
         return $user->isBusyAtTimeOfEvent($this);
     }
+
+    public function getFormattedDate() {
+        $date = new \DateTime($this->startData);
+
+        return $date->format('d/m/Y');
+    }
+
+    public function getStartHour() {
+        $date = new \DateTime($this->startData);
+
+        return $date->format('H:i');
+    }
+
+    public function getEndHour() {
+        $date = new \DateTime($this->endData);
+
+        return $date->format('H:i');
+    }
 }

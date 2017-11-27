@@ -49,6 +49,12 @@ class EventController extends Controller {
 	}
 
 	public function cancelar($request, $response, $args) {
-		var_dump($args);
+		$event = Event::find($args['id']);
+		$user = User::find(Authentication::getUserId());
+
+		$event->spectators()->detach($user->id);
+
+		$this->flash->addMessage('success', 'Inscrição cancelada com sucesso');
+		return $response->withRedirect('/eventos');
 	}
 }

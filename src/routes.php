@@ -9,6 +9,8 @@ $app->get('/evento/{id}/inscrever', 'App\Controller\EventController:inscrever')-
 
 $app->get('/evento/{id}/cancelar', 'App\Controller\EventController:cancelar')->setName('eventos.cancelar')->add($auth);
 
+$app->get('/account', 'App\Controller\AccountController:update')->setName('account.update')->add($auth);
+
 // Authentication Routes
 $app->get('/cadastrar', 'App\Controller\AuthController:signup')->setName('auth.signup')->add($authLogin);
 

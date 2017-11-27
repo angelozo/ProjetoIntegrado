@@ -23,16 +23,16 @@ class User extends Model {
     }
 
     public function isBusyAtTimeOfEvent($eventToEnroll) {
-    	$eventToEnrollStartDate = new \DateTime($eventToEnroll->startDate);
-    	$eventToEnrollEndDate = new \DateTime($eventToEnroll->endDate);
+    	$eventToEnrollStartDate = new \DateTime($eventToEnroll->startData);
+    	$eventToEnrollEndDate = new \DateTime($eventToEnroll->endData);
 
     	if(!$this->isEnrolledToAnyEvent()) {
     		return false;
     	}
 
     	foreach ($this->events as $event) {
-    		$eventStartDate = new \DateTime($event->startDate);
-    		$eventEndDate = new \DateTime($event->endDate);
+    		$eventStartDate = new \DateTime($event->startData);
+    		$eventEndDate = new \DateTime($event->endData);
 
     		if($eventEndDate > $eventToEnrollStartDate && $eventStartDate < $eventToEnrollEndDate) {
     			return true;

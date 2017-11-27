@@ -2,19 +2,22 @@
 
 <main>
 <div class="container">
+	<div class="col s12">
+		<h1>Eventos</h1>
+	</div>
+
 	<div class="events">
-	  <ul class="collapsible" data-collapsible="accordion">
 	  	{% if eventos is not empty %}
 	  		{% for evento in eventos %}
-			    <li>
+	  		<ul class="collapsible" data-collapsible="accordion">
+			    <li class="event">
 			      <div class="collapsible-header">
 			        <h2>{{ evento.nome }}</h2>
-
 			      </div>
 			      <div class="collapsible-body">
 			        <ul>
-			          <li>Data:	{{ evento.startData }}</li>
-			          <li>Horário:	{{ evento.startData }}</li>
+			          <li>Data:	{{ evento.getFormattedDate() }}</li>
+			          <li>Horário: De {{ evento.getStartHour() }} Até {{ evento.getEndHour() }}</li>
 			          <li>Local:	{{ evento.local }}</li>
 			          <li>Descrição detalhada do evento: {{ evento.descricao }} </li>
 			          <li>Palestrante: {{ evento.palestrante }}</li>
@@ -22,16 +25,21 @@
 			        </ul>
 			      </div>
 
+			      {% if evento.isInscribable() %}
 			    	{% if evento.areYouEnrolledWithThisEvent() %}
 			    		<a href="{{ path_for('eventos.cancelar', {'id': evento.id}) }}" class="waves-effect waves-light btn-large red">Cancelar Inscrição</a>
 			    	{% else %}
 			    		{% if evento.areYouBusyAtTimeOfThisEvent() %}
-			    			<a href="#" class="waves-effect waves-light btn-large red">Você já está inscrito em outro evento neste horário!</a>
+			    			<a href="#" class="btn-large grey">Você já está inscrito em outro evento neste horário!</a>
 			    		{% else %}
 			    			<a href="{{ path_for('eventos.inscrever', {'id': evento.id}) }}" class="waves-effect waves-light btn-large red">Realizar Inscrição</a>
 			    		{% endif %}
 			    	{% endif %}
+			      {% else %}
+			      	<a href="#" class="waves-effect waves-light btn-large red">Este evento não necessita de inscrição</a>
+			      {% endif %}
 			    </li>
+			    </ul>
 		    {% endfor %}
 	  	{% else %}
 	  		<li class="red">
@@ -40,7 +48,6 @@
 		      </div>
 		    </li>
 	  	{% endif %}
-	  </ul>
 	</div>
 </div>
 {{ include('menu.phtml') }}
