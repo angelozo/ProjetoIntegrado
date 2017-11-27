@@ -69,15 +69,15 @@
         <div class="row">
           <div class="input-field col s6">
             <select name="tipo_instituicao" name="tipo_instituicao" id="tipo_instituicao" type="text" class="validate">
-            	<option value="faculdade" {% if data.tipo_instituicao == 'faculdade' %} selected="true" {% endif %}>Faculdade</option>
-            	<option value="empresa" {% if data.tipo_instituicao == 'empresa' %} selected="true" {% endif %}>Empresa</option>
-            	<option value="escola" {% if data.tipo_instituicao == 'escola' %} selected="true" {% endif %}>Escola</option>
+            	<option value="faculdade" {% if data.tipoInstituicao == 'faculdade' %} selected="true" {% endif %}>Faculdade</option>
+            	<option value="empresa" {% if data.tipoInstituicao == 'empresa' %} selected="true" {% endif %}>Empresa</option>
+            	<option value="escola" {% if data.tipoInstituicao == 'escola' %} selected="true" {% endif %}>Escola</option>
             </select>
             <label for="tipo_instituicao">Tipo da instituição</label>
           </div>
 
           <div class="input-field col s6">
-            <input id="nome_instituicao" name="nome_instituicao" type="text" class="validate" value="{{ data.nome_instituicao }}">
+            <input id="nome_instituicao" name="nome_instituicao" type="text" class="validate" value="{{ data.nomeInstituicao }}">
             <label for="nome_instituicao">Nome da instituição</label>
           </div>
         </div>
