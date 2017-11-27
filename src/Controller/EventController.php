@@ -24,28 +24,33 @@ class EventController extends Controller {
 		$user = User::find(Authentication::getUserId());
 
 		if(!$event->isInscribable()) {
-			$this->flash->addMessage('error', 'Este evento não precisa de inscrição.');
+			$this->flash->addMessage('code', -1);
+			$this->flash->addMessage('message', 'Este evento não precisa de inscrição.');
 			return $response->withRedirect('/eventos');
 		}
 
 		if(!$event->haveSlots()) {
-			$this->flash->addMessage('error', 'Limite de vagas esgotada.');
+			$this->flash->addMessage('code', -1);
+			$this->flash->addMessage('message', 'Limite de vagas esgotada.');
 			return $response->withRedirect('/eventos');
 		}
 
 		if($user->isEnrolledTo($event)) {
-			$this->flash->addMessage('error', 'Você já está cadastrado neste evento.');
+			$this->flash->addMessage('code', -1);
+			$this->flash->addMessage('message', 'Você já está cadastrado neste evento.');
 			return $response->withRedirect('/eventos');
 		}
 
 		if($user->isBusyAtTimeOfEvent($event)) {
-			$this->flash->addMessage('error', 'Você já está cadastrado em outro evento neste horário.');
+			$this->flash->addMessage('code', -1);
+			$this->flash->addMessage('message', 'Você já está cadastrado em outro evento neste horário.');
 			return $response->withRedirect('/eventos');
 		}
 
 		$event->spectators()->attach($user->id);
 
-		$this->flash->addMessage('success', 'Inscrito com sucesso');
+		$this->flash->addMessage('code', 1);
+		$this->flash->addMessage('message', 'Inscrito com sucesso');
 		return $response->withRedirect('/eventos');
 	}
 
@@ -55,7 +60,8 @@ class EventController extends Controller {
 
 		$event->spectators()->detach($user->id);
 
-		$this->flash->addMessage('success', 'Inscrição cancelada com sucesso');
+		$this->flash->addMessage('code', 1);
+		$this->flash->addMessage('message', 'Inscrição cancelada com sucesso');
 		return $response->withRedirect('/eventos');
 	}
 }

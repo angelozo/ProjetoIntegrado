@@ -44,7 +44,8 @@ class AccountController extends Controller {
 
 			$user->save();
 
-			$this->flash->addMessage('success', 'Dados atualizados com sucesso.');
+			$this->flash->addMessage('code', 1);
+			$this->flash->addMessage('message', 'Dados atualizados com sucesso.');
 			return $response->withRedirect('/account');
 		} catch(\Exception $e) {
 			$errorMessage = 'Erro ao cadastrar usuário.';

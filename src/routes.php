@@ -13,6 +13,9 @@ $app->get('/account', 'App\Controller\AccountController:update')->setName('accou
 
 $app->post('/account', 'App\Controller\AccountController:updatePost')->setName('account.update.post')->add($auth);
 
+// Certification pdf routes
+$app->get('/gerar-comprovante-inscricao', 'App\Controller\ReceiptController:receiptEnrollmentPdf')->setName('receipt.get.enrollment')->add($auth);
+
 // Authentication Routes
 $app->get('/cadastrar', 'App\Controller\AuthController:signup')->setName('auth.signup')->add($authLogin);
 

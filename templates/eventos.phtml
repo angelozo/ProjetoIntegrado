@@ -6,13 +6,27 @@
 		<h1>Eventos</h1>
 	</div>
 
+	<div class="col s12">
+		{% if messages %}
+		{% if messages.code.0 == 1 %}
+			<div class="success message">
+				{{ messages.message.0 }}
+			</div>
+		{% else %}
+			<div class="error message">
+				{{ messages.message.0 }}
+			</div>
+		{% endif %}
+		{% endif %}
+	</div>
+
 	<div class="events">
 	  	{% if eventos is not empty %}
 	  		{% for evento in eventos %}
 	  		<ul class="collapsible" data-collapsible="accordion">
 			    <li class="event">
 			      <div class="collapsible-header">
-			        <h2>{{ evento.nome }}</h2>
+			        <h2>{{ evento.nome }} <b>(Clique aqui para visualizar os detalhes)</b></h2>
 			      </div>
 			      <div class="collapsible-body">
 			        <ul>

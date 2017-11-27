@@ -12,6 +12,8 @@ class User extends Model {
 
 	public function setPasswordAttribute($value) {
 		$this->attributes['password'] = Crypt::setHash($value);
+
+        return $this->attributes['password'];
 	}
 
 	public function events() {
