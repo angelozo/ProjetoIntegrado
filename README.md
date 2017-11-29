@@ -4,11 +4,14 @@
 
 ##### Database
 
-1. Crie um banco de dados com o nome inter e configure os dados no $config /lib/Database/DatabaseFactory.php
-2. Instale o composer [https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md)
-3. Certifique-se de ter instalado o PHP7.1
-4. Rode um composer install dentro da pasta no seu melhor terminal
-5. dab it
+1. Crie um banco de dados com o nome inter e configure os dados no no settings.php
+2. Importe o .SQL da documentação
+3. Instale o composer [https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md)
+4. Certifique-se de ter instalado o PHP7.1
+5. Rode um composer install dentro da pasta no seu melhor terminal
+6. Instale o nodejs e o npm
+7. Rode um npm install dentro da pasta ./public/assets/
+8. dab it
 
 ### Colaboradores
 
