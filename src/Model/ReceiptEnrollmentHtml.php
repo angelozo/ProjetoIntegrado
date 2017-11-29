@@ -76,7 +76,7 @@ class ReceiptEnrollmentHtml {
 
 	public function addEmptyAlertRow() {
 		$row = '<tr>';
-		$row .= 'Não cadastrado em nenhum evento.'
+		$row .= 'Não cadastrado em nenhum evento.';
 		$row .= '</tr>';
 
 		$this->eventTableRows .= $row;

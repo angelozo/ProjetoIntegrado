@@ -11,7 +11,11 @@ class Event extends Model {
 	protected $fillable = ['nome','startData','endData', 'local', 'disponivelParaAlunos', 'disponivelParaExterno', 'palestrante', 'descricao', 'limiteUsuarios', 'inscricao'];
 
 	public function spectators() {
-        return $this->belongsToMany('App\Model\User', 'evento_usuario', 'evento', 'usuario');
+        return $this->belongsToMany('App\Model\User', 'inscricao', 'evento', 'usuario');
+    }
+
+    public function presences() {
+        return $this->hasMany('App\Model\CheckinCheckout');
     }
 
     public function isInscribable() {
@@ -24,6 +28,13 @@ class Event extends Model {
 
     public function getRemainingSlots() {
         return $this->limiteUsuarios - $this->spectators->count();
+    }
+
+    public function alredyHappened() {
+        $now = new \DateTime();
+        $endData = new \DateTime($this->endData);
+
+        return ($now > $endData);
     }
 
     public function areYouEnrolledWithThisEvent() {

@@ -25,6 +25,16 @@ class Authentication {
 		return false;
 	}
 
+	public static function logout() {
+		$session = new Session();
+
+		$session->setSession('status', null);
+		$session->setSession('username', null);
+		$session->setSession('id', null);
+
+		$session->sessionDestroy();
+	}
+
 	public static function getUserId() {
 		$session = new Session();
 

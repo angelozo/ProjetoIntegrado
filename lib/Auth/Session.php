@@ -21,6 +21,10 @@ class Session {
 		session_start();
 	}
 
+	public function sessionDestroy() {
+		session_destroy();
+	}
+
 	public function setSession($field, $value) {
 		$_SESSION[$field] = $value;
 	}

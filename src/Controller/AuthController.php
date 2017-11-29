@@ -77,4 +77,10 @@ class AuthController extends Controller {
 
 		return $response->withRedirect('/eventos');
 	}
+
+	public function logout() {
+		Authentication::logout();
+
+		return $response->withRedirect('/login');
+	}
 }

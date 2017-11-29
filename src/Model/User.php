@@ -17,7 +17,11 @@ class User extends Model {
 	}
 
 	public function events() {
-        return $this->belongsToMany('App\Model\Event', 'evento_usuario', 'usuario', 'evento');
+        return $this->belongsToMany('App\Model\Event', 'inscricao', 'usuario', 'evento');
+    }
+
+    public function presences() {
+        return $this->hasMany('App\Model\Checkin');
     }
 
     public function isEnrolledTo($event) {

@@ -4,13 +4,11 @@
 			<li><div class="divider"></div></li>
 			<li><a href="{{ path_for('account.update') }}">Atualizar Dados Pessoais</a></li>
 			<li><div class="divider"></div></li>
-			<li><a href="{{ path_for('receipt.get.enrollment') }}">Gerar Comprovante de Inscrição</a></li>
+			<li><a href="{{ path_for('receipt.get.enrollment') }}"> <i class="material-icons">file_download</i> Gerar Comprovante de Inscrição</a></li>
 			<li><div class="divider"></div></li>
-			<li><a href="#!">Gerar Lista de Presença</a></li>
+			<li><a href="{{ path_for('receipt.get.presence') }}"> <i class="material-icons">file_download</i> Gerar Lista de Presença</a></li>
 			<li><div class="divider"></div></li>
-			<li><a href="#!">Gerar Certificados</a></li>
-			<li><div class="divider"></div></li>
-			<li><a href="#!">Sair</a></li>
+			<li><a href="{{ path_for('auth.logout') }}">Sair</a></li>
 			<li><div class="divider"></div></li>
 		</ul>
 	</div>

@@ -31,6 +31,9 @@ main {
 .events a {
   width: 100%; }
 
+.container.login i.material-icons {
+  margin: 0; }
+
 .message {
   padding: 15px;
   color: #FFFFFF;

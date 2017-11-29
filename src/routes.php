@@ -16,6 +16,8 @@ $app->post('/account', 'App\Controller\AccountController:updatePost')->setName('
 // Certification pdf routes
 $app->get('/gerar-comprovante-inscricao', 'App\Controller\ReceiptController:receiptEnrollmentPdf')->setName('receipt.get.enrollment')->add($auth);
 
+$app->get('/gerar-lista-presenca', 'App\Controller\ReceiptController:receiptPresencePdf')->setName('receipt.get.presence')->add($auth);
+
 // Authentication Routes
 $app->get('/cadastrar', 'App\Controller\AuthController:signup')->setName('auth.signup')->add($authLogin);
 
@@ -24,3 +26,5 @@ $app->post('/cadastrar', 'App\Controller\AuthController:signupPost')->setName('a
 $app->get('/login', 'App\Controller\AuthController:login')->setName('auth.login')->add($authLogin);
 
 $app->post('/login', 'App\Controller\AuthController:loginPost')->setName('auth.login.post')->add($authLogin);
+
+$app->get('/logout', 'App\Controller\AuthController:logout')->setName('auth.logout')->add($authLogin);
